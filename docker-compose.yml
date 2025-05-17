@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: jenkins-pipeline-generator
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./model:/app/model
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - MODEL_PATH=model/final
+      - MODEL_NAME=t5-small
+      - MAX_LENGTH=100
+      - DEBUG=true
+      - ENVIRONMENT=production
+    restart: unless-stopped 

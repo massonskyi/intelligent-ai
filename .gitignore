@@ -1,0 +1,11 @@
+.env
+node_modules
+/.env
+.idea
+.vscode
+.pytest_cache
+venv
+/model
+__pycache__
+.pytest_cache
+/codet5p_finetuned
