@@ -6,10 +6,10 @@ import json, os, signal, asyncio, time
 from typing import Any, Dict, Union
 import zipfile
 
-from fastapi import FastAPI, File, HTTPException, Path, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
+from pathlib import Path
 from src.engine.model_fetcher import ensure_model
 from src.engine.model_handler import JenkinsPipelineGenerator
 from src.engine.analyze_project import analyze_async
