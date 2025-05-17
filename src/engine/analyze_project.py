@@ -3,11 +3,9 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 from typing import Tuple, Dict, Any, List
 
-#  (помещаем сюда большой список PROJECT_SIGNATURES - без изменений)
-from .signatures import PROJECT_SIGNATURES          # чтобы main.py не раздулся
+from .signatures import PROJECT_SIGNATURES
 
-_EXEC = ThreadPoolExecutor(max_workers=2)            # reuse thread-pool
-
+_EXEC = ThreadPoolExecutor(max_workers=2)
 
 # ───────── helpers ────────────────────────────────────────────────────────────
 def _read_file(path: Path, limit: int = 50) -> str:
@@ -15,7 +13,6 @@ def _read_file(path: Path, limit: int = 50) -> str:
         return "".join(path.read_text(encoding="utf-8").splitlines(True)[:limit]).strip()
     except Exception:
         return ""
-
 
 def _extract_deps(cfg: Path, pattern: str, ptype: str) -> List[str]:
     if not cfg.exists():
@@ -30,7 +27,6 @@ def _extract_deps(cfg: Path, pattern: str, ptype: str) -> List[str]:
         return [f"{g}:{a}" for g, a in re.findall(pattern, txt, re.M)]
     return re.findall(pattern, txt, re.M)
 
-
 # ───────── публичная функция ─────────────────────────────────────────────────
 def analyze_repository(repo_root: str = ".") -> Tuple[Dict[str, Any], str]:
     """
@@ -38,7 +34,12 @@ def analyze_repository(repo_root: str = ".") -> Tuple[Dict[str, Any], str]:
     который ждёт ваша модель**, и возвращает кортеж (json_dict, hash).
     """
     root = Path(repo_root).resolve()
-    files = [str(p) for p in root.rglob("*") if p.is_file()]
+    # Исключаем папки .git, .idea, .vscode и intellije-ai
+    exclude_dirs = {'.git', '.idea', '.vscode', 'intelligent-ai'}
+    files = [
+        str(p) for p in root.rglob("*")
+        if p.is_file() and not any(part in exclude_dirs for part in p.parts)
+    ]
     docker = any(p.lower().endswith("dockerfile") for p in files)
 
     # определяем тип проекта
@@ -96,7 +97,6 @@ def analyze_repository(repo_root: str = ".") -> Tuple[Dict[str, Any], str]:
 
     h = hashlib.sha256(json.dumps(pj, sort_keys=True).encode()).hexdigest()
     return pj, h
-
 
 # ───────── asyncio-friendly wrapper ───────────────────────────────────────────
 async def analyze_async(repo_root: str = ".") -> Tuple[Dict[str, Any], str]:

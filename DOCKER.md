@@ -27,18 +27,12 @@ docker-compose logs -f
 docker build -t jenkins-pipeline-generator .
 
 # Запустить контейнер
-docker run -d \
-  --name jenkins-pipeline-generator \
-  -p 8000:8000 \
-  -v $(pwd)/model:/app/model \
-  -e HOST=0.0.0.0 \
-  -e PORT=8000 \
-  -e MODEL_PATH=model/final \
-  -e MODEL_NAME=t5-small \
-  -e MAX_LENGTH=100 \
-  -e DEBUG=true \
-  -e ENVIRONMENT=production \
-  jenkins-pipeline-generator
+docker run --gpus all \
+           --rm \
+           -p 8000:8000 \         # хост:контейнер
+           --name ai-pipeline \
+           ai-pipeline-server:gpu     # или :latest, если так собрали
+
 ```
 
 ## Доступ к API
