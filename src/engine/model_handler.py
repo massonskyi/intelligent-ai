@@ -109,8 +109,6 @@ class JenkinsPipelineGenerator:
                 **inputs,
                 max_length=self.settings.MAX_LENGTH,
                 num_beams=5,
-                no_repeat_ngram_size=2,
-                early_stopping=True,
             ),
         )
         if self.settings.DEBUG:

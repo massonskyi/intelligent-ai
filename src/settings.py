@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     MODEL_PATH: str = Field(default=f"{os.getcwd()}/codet5p_finetuned")
     print(MODEL_NAME)
 
-    MAX_LENGTH: int = Field(default=255)
+    MAX_LENGTH: int = Field(default=2048)
     
     # Environment Settings
     ENVIRONMENT: str = Field(default="development")
