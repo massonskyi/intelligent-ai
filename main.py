@@ -52,37 +52,63 @@
 
 # if __name__ == "__main__":
 #     asyncio.run(main())
-import argparse
-import json
-import sys
-import asyncio
-from src.engine.model_handler import JenkinsPipelineGenerator
-import sys
-import traceback
+# import argparse
+# import json
+# import sys
+# import asyncio
+# from src.engine.model_handler import JenkinsPipelineGenerator
+# import sys
+# import traceback
 
-def crash_reporter(type, value, tb):
-    traceback.print_exception(type, value, tb, file=sys.stderr)
-    sys.stderr.flush()
-    sys.stdout.flush()
+# def crash_reporter(type, value, tb):
+#     traceback.print_exception(type, value, tb, file=sys.stderr)
+#     sys.stderr.flush()
+#     sys.stdout.flush()
 
-sys.excepthook = crash_reporter
+# sys.excepthook = crash_reporter
 
-async def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input", required=True)
-    parser.add_argument("--output", required=True)
-    args = parser.parse_args()
+# async def main():
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument("--input", required=True)
+#     parser.add_argument("--output", required=True)
+#     args = parser.parse_args()
 
+#     try:
+#         with open(args.input, "r", encoding="utf-8") as f:
+#             input_json = json.load(f)
+
+#         generator = JenkinsPipelineGenerator()
+#         await generator.initialize()
+#         pipeline = await generator.generate_pipeline(input_json)
+
+#         with open(args.output, "w", encoding="utf-8") as f:
+#             f.write(pipeline)
+
+#         print(json.dumps({"status": "success"}))
+#     except Exception as e:
+#         traceback.print_exc()
+#         print(json.dumps({"error": str(e), "status": "error"}), file=sys.stderr)
+#         sys.exit(1)
+
+# if __name__ == "__main__":
+#     asyncio.run(main())
+import argparse, json, sys, traceback
+
+def main():
     try:
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--input", required=True)
+        parser.add_argument("--output", required=True)
+        args = parser.parse_args()
+        print("[DEBUG] args:", sys.argv, file=sys.stderr)
+
         with open(args.input, "r", encoding="utf-8") as f:
             input_json = json.load(f)
-
-        generator = JenkinsPipelineGenerator()
-        await generator.initialize()
-        pipeline = await generator.generate_pipeline(input_json)
+        print("[DEBUG] loaded input", file=sys.stderr)
 
         with open(args.output, "w", encoding="utf-8") as f:
-            f.write(pipeline)
+            f.write("pipeline test")
+        print("[DEBUG] wrote output", file=sys.stderr)
 
         print(json.dumps({"status": "success"}))
     except Exception as e:
@@ -91,4 +117,4 @@ async def main():
         sys.exit(1)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
