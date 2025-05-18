@@ -16,89 +16,125 @@ REPO_ID = "masonskiy/codet5p-200m-jenkins-pipeline"
 import re
 
 def extract_steps(input_json):
-    """
-    Извлекает команды для stages из входного json.
-    Возвращает dict: {stage_name: [cmd1, cmd2, ...]}
-    """
     scripts = input_json.get("input", {}).get("project", {}).get("scripts", {})
     stages = {}
-    # Обычные пайтон-проекты: build, test, lint, etc.
     if "build" in scripts:
         stages["Build"] = [v for v in scripts["build"].values() if isinstance(v, str)]
     if "test" in scripts:
         stages["Test"] = [v for v in scripts["test"].values() if isinstance(v, str)]
     if "lint" in scripts:
         stages["Lint"] = [v for v in scripts["lint"].values() if isinstance(v, str)]
-    # можно расширить: docker, deploy и др.
+    if "docker" in scripts:
+        stages["Build Docker Image"] = [v for v in scripts["docker"].values() if isinstance(v, str)]
+    if "deploy" in scripts:
+        stages["Deploy"] = [v for v in scripts["deploy"].values() if isinstance(v, str)]
     return stages
 
-def fix_jenkins_pipeline(pipeline: str, input_json: dict) -> str:
-    """
-    Автофиксирует синтаксис и дописывает недостающие команды на основе input_json.
-    """
-    # Получаем реальные команды для вставки
-    step_cmds = extract_steps(input_json)
-    # Например: {"Build": ["pip install -r requirements.txt"], "Test": ["pytest"]}
+def fix_brace_nesting(pipeline: str) -> str:
+    # То же, что выше, но с доп. очисткой пустых строк
+    lines = pipeline.splitlines()
+    fixed_lines = []
+    brace_stack = []
+    for i, line in enumerate(lines):
+        opens = line.count('{')
+        closes = line.count('}')
+        fixed_lines.append(line)
+        for _ in range(opens):
+            brace_stack.append(i)
+        for _ in range(closes):
+            if brace_stack:
+                brace_stack.pop()
+    for _ in range(len(brace_stack)):
+        fixed_lines.append('}')
+    return '\n'.join(fixed_lines).strip()
 
-    # --- 1. Переносим bat/sh из when в steps ---
-    def move_bat_sh_from_when(match):
-        cmd = match.group(2).strip()
-        step_type = match.group(1)
-        return (
-            "when {\n"
-            "    expression { env.BRANCH_NAME == 'main' }\n"
-            "}\n"
-            "steps {\n"
-            f"    {step_type} '{cmd}'\n"
-            "}"
-        )
+def fix_jenkins_pipeline(pipeline: str, input_json: dict = None) -> str:
+    """
+    Расширенная постобработка Jenkinsfile:
+      - Исправляет типовые и сложные ошибки.
+      - Переносит bat/sh из when в steps, валидирует when/steps.
+      - Вставляет команды из input_json или echo TODO.
+      - Исправляет скобки, stages, post, environment.
+      - Очищает лишние или битые блоки.
+    """
 
+    # 1. Удаление комментариев в стиле // ... (если они мешают парсингу)
+    pipeline = re.sub(r"//.*", "", pipeline)
+
+    # 2. Перенос bat/sh из when в steps
+    def move_when_command_to_steps(match):
+        stage_name = match.group(1)
+        when_body = match.group(2)
+        cmd_match = re.search(r"(bat|sh)\s+'([^']+)'", when_body)
+        if cmd_match:
+            step_type, step_cmd = cmd_match.groups()
+            return (
+                f"stage('{stage_name}') {{\n"
+                f"    when {{ expression {{ env.BRANCH_NAME == 'main' }} }}\n"
+                f"    steps {{\n"
+                f"        {step_type} '{step_cmd}'\n"
+                f"        echo 'TODO'\n"
+                f"    }}\n"
+                f"}}"
+            )
+        return f"stage('{stage_name}') {{\n    steps {{ echo 'TODO' }}\n}}"
     pipeline = re.sub(
-        r"when\s*\{\s*(bat|sh)\s+'([^']+)'\s*\}",
-        move_bat_sh_from_when,
+        r"stage\('([^']+)'\)\s*\{\s*when\s*\{([^}]+)\}",
+        move_when_command_to_steps,
         pipeline,
-        flags=re.MULTILINE | re.DOTALL,
+        flags=re.DOTALL
     )
 
-    # --- 2. Удаляем пустые when ---
+    # 3. Удаляем невалидные when без expression
+    pipeline = re.sub(r"when\s*\{\s*(bat|sh)[^}]+\}", "when { expression { env.BRANCH_NAME == 'main' } }", pipeline, flags=re.DOTALL)
     pipeline = re.sub(r"when\s*\{\s*\}", "", pipeline)
 
-    # --- 3. Исправляем stage без steps (дописываем команды) ---
-    def add_steps_if_missing(match):
-        stage_def = match.group(1)
-        stage_body = match.group(2)
-        stage_name_match = re.search(r"'([^']+)'", stage_def)
-        stage_name = stage_name_match.group(1) if stage_name_match else ""
-        # Уже есть steps? — оставляем
-        if re.search(r"steps\s*\{", stage_body):
+    # 4. Исправляем дублирующиеся или вложенные steps, когда steps встречается несколько раз подряд
+    pipeline = re.sub(r"(steps\s*\{[^\}]*\})\s*steps\s*\{[^\}]*\}", r"\1", pipeline, flags=re.DOTALL)
+
+    # 5. Добавляем steps, если их нет
+    stage_cmds = extract_steps(input_json) if input_json else {}
+    def ensure_steps(match):
+        stage_name = match.group(1)
+        body = match.group(2)
+        if 'steps' in body:
             return match.group(0)
-        # Если есть команда из json — добавим ее
-        steps_lines = []
-        if stage_name in step_cmds:
-            for cmd in step_cmds[stage_name]:
-                if "pip" in cmd or "pytest" in cmd or "flake8" in cmd:
-                    steps_lines.append(f"bat '{cmd}'")
-                elif "docker" in cmd:
-                    steps_lines.append(f"bat '{cmd}'")
-                else:
-                    steps_lines.append(f"echo '{cmd}'")
+        cmds = stage_cmds.get(stage_name, [])
+        steps_code = "\n".join(f"        bat '{cmd}'" for cmd in cmds) if cmds else "        echo 'TODO'"
+        return f"stage('{stage_name}') {{{body}\n    steps {{\n{steps_code}\n    }}\n}}"
+    pipeline = re.sub(r"stage\('([^']+)'\)\s*\{([^}]*)\}", ensure_steps, pipeline, flags=re.DOTALL)
+
+    # 6. Исправление батч-команд типа bat pip → bat 'pip'
+    pipeline = re.sub(r"bat\s+([^\n{]+)", lambda m: f"bat '{m.group(1).strip()}'", pipeline)
+
+    # 7. Вставка/коррекция основных блоков pipeline, stages, environment, post если вдруг они утеряны
+    if not re.search(r'pipeline\s*\{', pipeline):
+        stages_block = re.search(r"(stages\s*\{[^\}]*\})", pipeline, flags=re.DOTALL)
+        stages_text = stages_block.group(0) if stages_block else ""
+        pipeline = f"pipeline {{\n    agent any\n{stages_text}\n}}"
+
+    if not re.search(r'stages\s*\{', pipeline):
+        # Добавляем все stages в один блок stages { ... }
+        stages = re.findall(r"(stage\s*\([^)]+\)\s*\{[^\}]*\})", pipeline, flags=re.DOTALL)
+        if stages:
+            stages_block = "stages {\n" + "\n".join("    " + s.replace('\n', '\n    ') for s in stages) + "\n}"
+            pipeline = re.sub(r"(stage\s*\([^)]+\)\s*\{[^\}]*\})", "", pipeline, flags=re.DOTALL)
+            pipeline = re.sub(r'(pipeline\s*\{)', r'\1\n' + stages_block, pipeline)
         else:
-            steps_lines = ["echo 'TODO'"]
+            pipeline = re.sub(r'(pipeline\s*\{)', r'\1\n    stages {\n    }\n', pipeline)
 
-        steps_block = "    steps {\n        " + "\n        ".join(steps_lines) + "\n    }"
-        return f"stage{stage_def} {{{stage_body}\n{steps_block}\n}}"
+    # 8. Исправляем дублирующиеся или незакрытые скобки, вложенные blocks
+    pipeline = fix_brace_nesting(pipeline)
 
-    pipeline = re.sub(
-        r"(\\s*\\([^)]+\\))\\s*\\{([^}]*)\\}",
-        add_steps_if_missing,
-        pipeline,
-        flags=re.DOTALL,
-    )
+    # 9. Удаляем пустые строки, trailing пробелы, дублирующиеся stages, пустые этапы
+    pipeline = re.sub(r'\n\s*\n', '\n', pipeline)
+    pipeline = re.sub(r'stage\s*\([^)]+\)\s*\{\s*steps\s*\{\s*\}\s*\}', '', pipeline, flags=re.DOTALL)
+    pipeline = re.sub(r'(archiveArtifacts[^\}]+)\n[^\n]*archiveArtifacts', r'\1', pipeline)
+    pipeline = re.sub(r'^\s*$', '', pipeline, flags=re.MULTILINE)
 
-    # --- 4. Лишние пробелы ---
-    pipeline = re.sub(r"\n\s*\}", "\n}", pipeline)
-    pipeline = re.sub(r"\n{3,}", "\n\n", pipeline)
-    return pipeline
+    # 10. Финальный фикс вложенности
+    pipeline = fix_brace_nesting(pipeline)
+    return pipeline.strip()
 
 def ensure_model(model_dir: str):
     """
