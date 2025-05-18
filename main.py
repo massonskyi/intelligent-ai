@@ -5,6 +5,10 @@ import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import time
 import functools
+import sys
+import os
+print(f"[PYTHON EXECUTABLE] {sys.executable}", flush=True)
+print(f"[VIRTUAL ENV] {os.environ.get('VIRTUAL_ENV')}", flush=True)
 
 # Timer decorator
 def time_it(func):
