@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    environment {
+        BUILD_TAG = "${env.BUILD_ID}"
+        PYTHON_VERSION = '3.9'
+        PIP_CACHE_DIR = '.pip-cache'
+    }
+    stages {
+        stage('Build') {
+                    steps {
+            bat 'pip install -r requirements.txt'
+        }
+                }
+        stage('Deploy') {
+                    when {
+                        expression { env.BRANCH_NAME == 'main' }
+                    }
+                    steps {
+                        // Deploying python to staging
+                        bat 'echo Deploying to staging'
+                    }
+                }
+        stage('Test') {
+                    steps {
+            bat 'pytest'
+        }
+                }
+        stage('Publish') {
+                    steps {
+                        // Archiving artifacts: *.whl
+                        archiveArtifacts artifacts: '*.whl', allowEmptyArchive: true
+                    }
+                }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+        success {
+            echo 'Build for python succeeded with tag ${BUILD_TAG}!'
+        }
+        failure {
+            echo 'Build for python failed with tag ${BUILD_TAG}!'
+        }
+    }
+}

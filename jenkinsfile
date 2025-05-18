@@ -2,58 +2,48 @@ pipeline {
     agent any
     environment {
         BUILD_TAG = 'a9b9b9b9'
-}
+    }
     stages {
-        stage('Build') {
-            steps {
-                // Building python project
-                bat 'pip'
+        stage('Build')
+        steps {
+            bat 'pip'
+        }
+    }
+    stage('Deploy')
+    when {
+    expression { env.BRANCH_NAME == 'main' }
+}
+steps {
+    bat 'echo Deploying to staging'
 }
 }
-        stage('Deploy') {
-            when {
-                expression { env.BRANCH_NAME == 'main' }
-}
-            steps {
-                // Deploying python to staging
-                bat 'echo Deploying to staging'
+stage('Test')
+steps {
+    bat 'unittest'
 }
 }
-        stage('Test') {
-            steps {
-                // Running tests with unittest
-                bat 'unittest'
+stage('Publish')
+steps {
+    archiveArtifacts artifacts: '*.whl', allowEmptyArchive: true
 }
 }
-        stage('Publish') {
-            steps {
-                // Archiving artifacts: *.whl
-                archiveArtifacts artifacts: '*.whl', allowEmptyArchive: true
+stage('Build Docker Image')
 }
-}
-        stage('Build Docker Image') {
-            steps {
-                // Building Docker image for python
-                bat 'docker build -t python-app-9b9b9b:latest .'
-}
-}
-        stage('Deploy Docker Image') {
-            when {
-                // Deploying Docker to staging
-                bat 'echo Deploying to staging'
+stage('Deploy Docker Image')
+when {
+    bat 'echo Deploying to staging'
 }
 }
 }
-    post {
-        always {
-            // Clean up workspace for build c9b9b9b9
-            cleanWs()
-}
-        success {
-            echo 'Build for python succeeded with tag $BUILD_TAG!'
-}
-        failure {
-            echo 'Build for python failed with tag $BUILD_TAG!'
-}
+post {
+    always {
+        cleanWs()
+    }
+    success {
+        echo 'Build for python succeeded with tag $BUILD_TAG!'
+    }
+    failure {
+        echo 'Build for python failed with tag $BUILD_TAG!'
+    }
 }
 }

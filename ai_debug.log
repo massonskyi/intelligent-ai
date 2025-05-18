@@ -1,0 +1,219 @@
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jenkinsfile, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 46.65 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.80 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jenkinsfile, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.26 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.18 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.01 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.75 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 27.01 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.74 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.88 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 5.06 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 35.78 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.91 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.40 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.88 seconds
+Traceback (most recent call last):
+  File "D:\intelligent-ai\main.py", line 656, in main
+    fixed_pipeline = fix_jenkins_pipeline(generated_pipeline, input_json)
+  File "D:\intelligent-ai\main.py", line 311, in fix_jenkins_pipeline
+    pipeline = fix_quotes_in_commands(pipeline)
+NameError: name 'fix_quotes_in_commands' is not defined
+ERROR: name 'fix_quotes_in_commands' is not defined
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.20 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.84 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.13 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.78 seconds
+Traceback (most recent call last):
+  File "D:\intelligent-ai\main.py", line 427, in main
+    fixed_pipeline = format_jenkins_pipeline(generated_pipeline, input_json)
+  File "D:\intelligent-ai\main.py", line 111, in format_jenkins_pipeline
+    stage_cmds = extract_stage_steps(input_json)
+NameError: name 'extract_stage_steps' is not defined
+ERROR: name 'extract_stage_steps' is not defined
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.14 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.81 seconds
+Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+main() запущен: input=.\analysis3622465408713219007.json, output=jftest, model_path=./codet5p_finetuned
+Загрузка модели и токенизатора...
+Модель и токенизатор загружены
+Time taken for load_model: 26.30 seconds
+Prepared input: Generate a Jenkins pipeline for the given project configuration
+
+{'project': {'type': 'python', 'bui...
+Time taken for prepare_input: 0.00 seconds
+Tokenized input keys: ['input_ids', 'attention_mask'], shapes: [torch.Size([1, 512]), torch.Size([1, 512])]
+Time taken for tokenize_input: 0.00 seconds
+Генерируем Jenkins pipeline...
+Pipeline сгенерирован, длина: 1515
+Time taken for generate_pipeline: 4.86 seconds
+Pipeline записан в файл успешно.
