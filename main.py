@@ -13,53 +13,84 @@ import re
 
 LOGFILE = "ai_debug.log"
 REPO_ID = "masonskiy/codet5p-200m-jenkins-pipeline"
+import re
+
 def fix_jenkins_pipeline(pipeline: str) -> str:
     """
-    Исправляет типичные ошибки синтаксиса Jenkins Pipeline:
-      - Переносит bat/sh внутри when в steps
-      - Удаляет невалидные when-блоки
-      - Гарантирует, что каждый stage содержит steps
+    Автоматически исправляет синтаксические ошибки в Jenkinsfile, сгенерированном моделью:
+    - Переносит bat/sh из when в steps.
+    - Исправляет when { bat ... } → when { expression { ... } } + перенос в steps.
+    - Гарантирует, что каждый stage содержит steps.
+    - Удаляет пустые/невалидные when.
+    - Исправляет stage без steps.
     """
-    # 1. Заменяем ошибочные when { bat '...' } на when { expression { ... } } + перенос bat в steps
-    def when_bat_repl(match):
-        bat_cmd = match.group(1)
+
+    # --- 1. Переносим bat/sh из when в steps ---
+    def move_bat_sh_from_when(match):
+        cmd = match.group(2).strip()
+        step_type = match.group(1)
+        # Простой эвристический шаблон: можно заменить на expression, steps
         return (
             "when {\n"
             "    expression { env.BRANCH_NAME == 'main' }\n"
             "}\n"
             "steps {\n"
-            f"    bat {bat_cmd}\n"
+            f"    {step_type} '{cmd}'\n"
             "}"
         )
+
+    # Перенос всех when { bat ... } или when { sh ... }
     pipeline = re.sub(
-        r"when\s*\{\s*bat\s+'([^']+)'\s*\}",
-        when_bat_repl,
+        r"when\s*\{\s*(bat|sh)\s+'([^']+)'\s*\}",
+        move_bat_sh_from_when,
         pipeline,
-        flags=re.MULTILINE
+        flags=re.MULTILINE | re.DOTALL,
     )
 
-    # 2. Удаляем пустые when (вдруг они есть)
+    # --- 2. Удаляем пустые/невалидные when ---
     pipeline = re.sub(r"when\s*\{\s*\}", "", pipeline)
 
-    # 3. Добавляем steps, если stage содержит только when (редкий случай)
-    def ensure_steps_in_stage(match):
-        inner = match.group(1)
-        # Проверяем, есть ли steps
-        if "steps" not in inner:
-            return f"stage({match.group(2)}) {{{inner}\nsteps {{}}}}"
-        return match.group(0)
-    # Можно расширить если будут кейсы
+    # --- 3. Исправляем stage без steps (только с when) ---
+    # Находит stage, внутри которого только when {...}, без steps, и добавляет пустой steps {}
+    def add_steps_if_missing(match):
+        content = match.group(2)
+        # Если нет блока steps
+        if re.search(r"steps\s*\{", content):
+            return match.group(0)
+        else:
+            # После блока when добавляем пустой steps
+            fixed = re.sub(
+                r"(when\s*\{[^}]*\})",
+                r"\1\n    steps {\n        echo 'TODO'\n    }",
+                content,
+                flags=re.DOTALL,
+            )
+            # Если не было when — просто добавляем steps
+            if fixed == content:
+                fixed += "\n    steps {\n        echo 'TODO'\n    }"
+            return f"stage{match.group(1)} {{{fixed}\n}}"
 
-    # 4. Исправляем лишние запятые или невалидные пост-блоки (по необходимости)
-    # (Можно добавить сюда аналитику по другим частым ошибкам)
+    pipeline = re.sub(
+        r"stage(\s*\([^)]+\))\s*\{([^}]*)\}",
+        add_steps_if_missing,
+        pipeline,
+        flags=re.DOTALL,
+    )
 
-    # 5. Исправляем вложение when { bat ... } -> when { expression ... } + перенос bat в steps (универсально)
-    # (Повторяется для многострочных случаев, можно усложнить регэксп)
+    # --- 4. Удаляем лишние пробелы перед закрытием блоков ---
+    pipeline = re.sub(r"\n\s*\}", "\n}", pipeline)
 
-    # 6. Удаляем лишние пробелы перед закрытием блоков
-    pipeline = re.sub(r'\n\s*\}', '\n}', pipeline)
+    # --- 5. Удаляем пустые строки подряд ---
+    pipeline = re.sub(r"\n{3,}", "\n\n", pipeline)
+
+    # --- 6. Исправляем невалидные when внутри stage без expression ---
+    # (возможно, не нужно, если бат был только там, но можно добавить на всякий)
+    # pipeline = re.sub(
+    #     r"when\s*\{\s*([^\{\}]+)\s*\}", r"when {\n    expression { \1 }\n}", pipeline
+    # )
 
     return pipeline
+
 def ensure_model(model_dir: str):
     """
     Проверяет, есть ли файлы модели в `model_dir`.
