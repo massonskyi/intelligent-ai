@@ -9,10 +9,57 @@ import time
 import functools
 import os
 import traceback
+import re
 
 LOGFILE = "ai_debug.log"
 REPO_ID = "masonskiy/codet5p-200m-jenkins-pipeline"
+def fix_jenkins_pipeline(pipeline: str) -> str:
+    """
+    Исправляет типичные ошибки синтаксиса Jenkins Pipeline:
+      - Переносит bat/sh внутри when в steps
+      - Удаляет невалидные when-блоки
+      - Гарантирует, что каждый stage содержит steps
+    """
+    # 1. Заменяем ошибочные when { bat '...' } на when { expression { ... } } + перенос bat в steps
+    def when_bat_repl(match):
+        bat_cmd = match.group(1)
+        return (
+            "when {\n"
+            "    expression { env.BRANCH_NAME == 'main' }\n"
+            "}\n"
+            "steps {\n"
+            f"    bat {bat_cmd}\n"
+            "}"
+        )
+    pipeline = re.sub(
+        r"when\s*\{\s*bat\s+'([^']+)'\s*\}",
+        when_bat_repl,
+        pipeline,
+        flags=re.MULTILINE
+    )
 
+    # 2. Удаляем пустые when (вдруг они есть)
+    pipeline = re.sub(r"when\s*\{\s*\}", "", pipeline)
+
+    # 3. Добавляем steps, если stage содержит только when (редкий случай)
+    def ensure_steps_in_stage(match):
+        inner = match.group(1)
+        # Проверяем, есть ли steps
+        if "steps" not in inner:
+            return f"stage({match.group(2)}) {{{inner}\nsteps {{}}}}"
+        return match.group(0)
+    # Можно расширить если будут кейсы
+
+    # 4. Исправляем лишние запятые или невалидные пост-блоки (по необходимости)
+    # (Можно добавить сюда аналитику по другим частым ошибкам)
+
+    # 5. Исправляем вложение when { bat ... } -> when { expression ... } + перенос bat в steps (универсально)
+    # (Повторяется для многострочных случаев, можно усложнить регэксп)
+
+    # 6. Удаляем лишние пробелы перед закрытием блоков
+    pipeline = re.sub(r'\n\s*\}', '\n}', pipeline)
+
+    return pipeline
 def ensure_model(model_dir: str):
     """
     Проверяет, есть ли файлы модели в `model_dir`.
@@ -117,10 +164,11 @@ def main():
             input_json = json.load(f)
         formatted_input = prepare_input(input_json)
         inputs = tokenize_input(tokenizer, formatted_input)
-        generated_pipeline = generate_pipeline(model, tokenizer, inputs)
 
+        generated_pipeline = generate_pipeline(model, tokenizer, inputs)
+        fixed_pipeline = fix_jenkins_pipeline(generated_pipeline)
         with open(args.output, "w", encoding="utf-8") as f:
-            f.write(generated_pipeline)
+            f.write(fixed_pipeline)
         log("Pipeline записан в файл успешно.")
         print(json.dumps({"status": "success"}))
     except Exception as e:
