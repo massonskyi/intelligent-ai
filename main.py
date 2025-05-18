@@ -15,21 +15,35 @@ LOGFILE = "ai_debug.log"
 REPO_ID = "masonskiy/codet5p-200m-jenkins-pipeline"
 import re
 
-def fix_jenkins_pipeline(pipeline: str) -> str:
+def extract_steps(input_json):
     """
-    Автоматически исправляет синтаксические ошибки в Jenkinsfile, сгенерированном моделью:
-    - Переносит bat/sh из when в steps.
-    - Исправляет when { bat ... } → when { expression { ... } } + перенос в steps.
-    - Гарантирует, что каждый stage содержит steps.
-    - Удаляет пустые/невалидные when.
-    - Исправляет stage без steps.
+    Извлекает команды для stages из входного json.
+    Возвращает dict: {stage_name: [cmd1, cmd2, ...]}
     """
+    scripts = input_json.get("input", {}).get("project", {}).get("scripts", {})
+    stages = {}
+    # Обычные пайтон-проекты: build, test, lint, etc.
+    if "build" in scripts:
+        stages["Build"] = [v for v in scripts["build"].values() if isinstance(v, str)]
+    if "test" in scripts:
+        stages["Test"] = [v for v in scripts["test"].values() if isinstance(v, str)]
+    if "lint" in scripts:
+        stages["Lint"] = [v for v in scripts["lint"].values() if isinstance(v, str)]
+    # можно расширить: docker, deploy и др.
+    return stages
+
+def fix_jenkins_pipeline(pipeline: str, input_json: dict) -> str:
+    """
+    Автофиксирует синтаксис и дописывает недостающие команды на основе input_json.
+    """
+    # Получаем реальные команды для вставки
+    step_cmds = extract_steps(input_json)
+    # Например: {"Build": ["pip install -r requirements.txt"], "Test": ["pytest"]}
 
     # --- 1. Переносим bat/sh из when в steps ---
     def move_bat_sh_from_when(match):
         cmd = match.group(2).strip()
         step_type = match.group(1)
-        # Простой эвристический шаблон: можно заменить на expression, steps
         return (
             "when {\n"
             "    expression { env.BRANCH_NAME == 'main' }\n"
@@ -39,7 +53,6 @@ def fix_jenkins_pipeline(pipeline: str) -> str:
             "}"
         )
 
-    # Перенос всех when { bat ... } или when { sh ... }
     pipeline = re.sub(
         r"when\s*\{\s*(bat|sh)\s+'([^']+)'\s*\}",
         move_bat_sh_from_when,
@@ -47,48 +60,44 @@ def fix_jenkins_pipeline(pipeline: str) -> str:
         flags=re.MULTILINE | re.DOTALL,
     )
 
-    # --- 2. Удаляем пустые/невалидные when ---
+    # --- 2. Удаляем пустые when ---
     pipeline = re.sub(r"when\s*\{\s*\}", "", pipeline)
 
-    # --- 3. Исправляем stage без steps (только с when) ---
-    # Находит stage, внутри которого только when {...}, без steps, и добавляет пустой steps {}
+    # --- 3. Исправляем stage без steps (дописываем команды) ---
     def add_steps_if_missing(match):
-        content = match.group(2)
-        # Если нет блока steps
-        if re.search(r"steps\s*\{", content):
+        stage_def = match.group(1)
+        stage_body = match.group(2)
+        stage_name_match = re.search(r"'([^']+)'", stage_def)
+        stage_name = stage_name_match.group(1) if stage_name_match else ""
+        # Уже есть steps? — оставляем
+        if re.search(r"steps\s*\{", stage_body):
             return match.group(0)
+        # Если есть команда из json — добавим ее
+        steps_lines = []
+        if stage_name in step_cmds:
+            for cmd in step_cmds[stage_name]:
+                if "pip" in cmd or "pytest" in cmd or "flake8" in cmd:
+                    steps_lines.append(f"bat '{cmd}'")
+                elif "docker" in cmd:
+                    steps_lines.append(f"bat '{cmd}'")
+                else:
+                    steps_lines.append(f"echo '{cmd}'")
         else:
-            # После блока when добавляем пустой steps
-            fixed = re.sub(
-                r"(when\s*\{[^}]*\})",
-                r"\1\n    steps {\n        echo 'TODO'\n    }",
-                content,
-                flags=re.DOTALL,
-            )
-            # Если не было when — просто добавляем steps
-            if fixed == content:
-                fixed += "\n    steps {\n        echo 'TODO'\n    }"
-            return f"stage{match.group(1)} {{{fixed}\n}}"
+            steps_lines = ["echo 'TODO'"]
+
+        steps_block = "    steps {\n        " + "\n        ".join(steps_lines) + "\n    }"
+        return f"stage{stage_def} {{{stage_body}\n{steps_block}\n}}"
 
     pipeline = re.sub(
-        r"stage(\s*\([^)]+\))\s*\{([^}]*)\}",
+        r"(\\s*\\([^)]+\\))\\s*\\{([^}]*)\\}",
         add_steps_if_missing,
         pipeline,
         flags=re.DOTALL,
     )
 
-    # --- 4. Удаляем лишние пробелы перед закрытием блоков ---
+    # --- 4. Лишние пробелы ---
     pipeline = re.sub(r"\n\s*\}", "\n}", pipeline)
-
-    # --- 5. Удаляем пустые строки подряд ---
     pipeline = re.sub(r"\n{3,}", "\n\n", pipeline)
-
-    # --- 6. Исправляем невалидные when внутри stage без expression ---
-    # (возможно, не нужно, если бат был только там, но можно добавить на всякий)
-    # pipeline = re.sub(
-    #     r"when\s*\{\s*([^\{\}]+)\s*\}", r"when {\n    expression { \1 }\n}", pipeline
-    # )
-
     return pipeline
 
 def ensure_model(model_dir: str):
@@ -197,7 +206,9 @@ def main():
         inputs = tokenize_input(tokenizer, formatted_input)
 
         generated_pipeline = generate_pipeline(model, tokenizer, inputs)
-        fixed_pipeline = fix_jenkins_pipeline(generated_pipeline)
+        # после генерации pipeline
+        fixed_pipeline = fix_jenkins_pipeline(generated_pipeline, input_json)
+
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(fixed_pipeline)
         log("Pipeline записан в файл успешно.")
