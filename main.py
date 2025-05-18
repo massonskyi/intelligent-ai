@@ -52,28 +52,30 @@
 
 # if __name__ == "__main__":
 #     asyncio.run(main())
-import asyncio
+import argparse
 import json
 import sys
+import asyncio
 from src.engine.model_handler import JenkinsPipelineGenerator
 
 async def main():
-    try:
-        # Read input JSON from stdin or command-line argument
-        if len(sys.argv) > 1:
-            input_json = json.loads(sys.argv[1])
-        else:
-            input_json = json.load(sys.stdin)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", required=True)
+    parser.add_argument("--output", required=True)
+    args = parser.parse_args()
 
-        # Initialize generator
+    try:
+        with open(args.input, "r", encoding="utf-8") as f:
+            input_json = json.load(f)
+
         generator = JenkinsPipelineGenerator()
         await generator.initialize()
-
-        # Generate pipeline
         pipeline = await generator.generate_pipeline(input_json)
 
-        # Output result as JSON
-        print(json.dumps({"pipeline": pipeline, "status": "success"}))
+        with open(args.output, "w", encoding="utf-8") as f:
+            f.write(pipeline)
+
+        print(json.dumps({"status": "success"}))
     except Exception as e:
         print(json.dumps({"error": str(e), "status": "error"}))
         sys.exit(1)
