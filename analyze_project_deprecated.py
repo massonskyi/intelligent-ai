@@ -363,7 +363,7 @@ def generate_training_entry(repo_path="."):
     entry = {
         "instruction": f"Generate a Jenkins pipeline for the given project configuration {uuid.uuid4().hex[:8]}",
         "input": json.dumps(project_analysis, separators=(",", ":")),
-        # "output": pipeline
+        "output": pipeline
     }
 
     entry_hash = hashlib.sha256(json.dumps(entry, sort_keys=True).encode()).hexdigest()
