@@ -57,6 +57,15 @@ import json
 import sys
 import asyncio
 from src.engine.model_handler import JenkinsPipelineGenerator
+import sys
+import traceback
+
+def crash_reporter(type, value, tb):
+    traceback.print_exception(type, value, tb, file=sys.stderr)
+    sys.stderr.flush()
+    sys.stdout.flush()
+
+sys.excepthook = crash_reporter
 
 async def main():
     parser = argparse.ArgumentParser()
@@ -77,7 +86,8 @@ async def main():
 
         print(json.dumps({"status": "success"}))
     except Exception as e:
-        print(json.dumps({"error": str(e), "status": "error"}))
+        traceback.print_exc()
+        print(json.dumps({"error": str(e), "status": "error"}), file=sys.stderr)
         sys.exit(1)
 
 if __name__ == "__main__":
