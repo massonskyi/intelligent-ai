@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
 from src.engine.model_fetcher import ensure_model
-from src.engine.model_handler import JenkinsPipelineGenerator
+from src.model_handler import JenkinsPipelineGenerator
 from src.engine.analyze_project import analyze_async
 from src.server.models import PipelineRequest, AnalyzeResp
 from src.settings import get_settings

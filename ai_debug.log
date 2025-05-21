@@ -217,3 +217,7 @@ Time taken for tokenize_input: 0.00 seconds
 Pipeline сгенерирован, длина: 1515
 Time taken for generate_pipeline: 4.86 seconds
 Pipeline записан в файл успешно.
+[PYTHON EXECUTABLE] /home/massonsky/repo/study/intelligent-ai/.venv/bin/python
+[VIRTUAL ENV] /home/massonsky/repo/study/intelligent-ai/.venv
+[WORKDIR] /home/massonsky/repo/study/intelligent-ai
+Используемое устройство: cuda
