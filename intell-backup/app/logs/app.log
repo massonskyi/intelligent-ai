@@ -1,0 +1,59 @@
+[92m[INFO] 2025-05-21 18:23:10 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:23:13 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:49:20 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:50:20 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:50:23 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:50:26 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:50:26 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:50:26 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:51:14 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:51:28 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:51:31 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:51:31 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:51:31 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:51:34 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:53:17 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:53:20 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:53:21 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:53:21 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:53:24 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:53:48 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:53:50 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:53:51 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:53:51 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:53:53 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:53:53 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:53:53 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 18:55:12 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:55:14 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:55:15 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:55:15 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:55:17 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:55:17 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:55:17 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 18:56:07 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:56:09 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:56:10 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:56:10 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:56:12 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:56:12 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:56:12 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 18:56:54 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:56:57 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 18:56:57 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 18:56:57 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 18:56:59 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:56:59 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 18:56:59 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 18:56:59 main:25 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-21 18:58:21 main:29 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-21 18:58:21 main:35 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-21 19:14:32 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 19:15:56 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 19:15:58 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 19:15:59 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 19:15:59 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 19:16:01 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 19:16:01 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 19:16:01 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 19:16:01 main:25 - Startup: Starting metrics persist background task.[0m

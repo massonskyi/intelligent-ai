@@ -1,0 +1,26 @@
+name: Llama Pipeline CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Test pipeline class (dry run, no model file)
+        run: |
+          python -c "from src.llama_cpp_pipeline import LlamaCppPipelineGenerator; print('Class imported OK')"
