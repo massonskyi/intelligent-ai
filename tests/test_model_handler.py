@@ -21,7 +21,7 @@ PROJECT_ROOT: str = str(Path(__file__).parent.parent)
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
-from src.engine.model_handler import JenkinsPipelineGenerator
+from src.model_handler import JenkinsPipelineGenerator
 
 
 # Mock the transformers library and its dependencies

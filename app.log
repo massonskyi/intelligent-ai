@@ -1,0 +1,184 @@
+2025-05-21 16:14:48,077 - root - INFO - logging_config:65 - Логирование настроено. Уровень: DEBUG. Файл: /home/massonsky/repo/study/intelligent-ai/app.log
+2025-05-21 16:14:48,077 - __main__ - INFO - deepseek_test:14 - Запуск примера использования DeepSeekModel...
+2025-05-21 16:14:48,077 - src.models.deepseek - INFO - deepseek:11 - Инициализация DeepSeekModel. model_id: 'deepseek-ai/deepseek-llm-7b-base', запрошенное устройство: 'None'
+2025-05-21 16:14:48,077 - src.models.deepseek - DEBUG - deepseek:50 - Определение оптимального устройства. Принудительное устройство: None
+2025-05-21 16:14:48,089 - src.models.deepseek - INFO - deepseek:55 - CUDA доступна. Используется устройство 'cuda'.
+2025-05-21 16:14:48,089 - src.models.deepseek - DEBUG - deepseek:14 - Выбрано устройство: cuda
+2025-05-21 16:14:48,089 - src.models.deepseek - DEBUG - deepseek:64 - Получение объема памяти GPU для устройства cuda.
+2025-05-21 16:14:48,106 - src.models.deepseek - DEBUG - deepseek:71 - Доступно VRAM (CUDA:0): 7.77 GB.
+2025-05-21 16:14:48,106 - src.models.deepseek - INFO - deepseek:81 - Выбор конфигурации загрузки. Устройство: cuda, VRAM: 7.8 GB.
+2025-05-21 16:14:48,106 - src.models.deepseek - INFO - deepseek:93 - Конфигурация для CUDA >= 6GB VRAM: torch.float16, device_map='auto', load_in_8bit=True.
+2025-05-21 16:14:48,106 - src.models.deepseek - DEBUG - deepseek:19 - Параметры для загрузки модели: {'torch_dtype': torch.float16, 'device_map': 'auto', 'load_in_8bit': True}
+2025-05-21 16:14:48,106 - src.models.deepseek - INFO - deepseek:22 - Загрузка токенизатора для 'deepseek-ai/deepseek-llm-7b-base'...
+2025-05-21 16:14:48,107 - urllib3.connectionpool - DEBUG - connectionpool:1049 - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-21 16:14:48,432 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-05-21 16:14:48,621 - src.models.deepseek - INFO - deepseek:25 - Токенизатор успешно загружен.
+2025-05-21 16:14:48,621 - src.models.deepseek - INFO - deepseek:31 - Загрузка модели 'deepseek-ai/deepseek-llm-7b-base'...
+2025-05-21 16:14:48,621 - src.models.deepseek - INFO - deepseek:107 - Начало загрузки модели 'deepseek-ai/deepseek-llm-7b-base' с параметрами: {'torch_dtype': torch.float16, 'device_map': 'auto', 'load_in_8bit': True}
+2025-05-21 16:14:48,769 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/config.json HTTP/1.1" 200 0
+2025-05-21 16:14:48,831 - bitsandbytes.cextension - DEBUG - cextension:71 - Loading bitsandbytes native library from: /home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/bitsandbytes/libbitsandbytes_cuda121.so
+2025-05-21 16:14:49,000 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/model.safetensors.index.json HTTP/1.1" 404 0
+2025-05-21 16:14:49,001 - urllib3.connectionpool - DEBUG - connectionpool:1049 - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-21 16:14:49,164 - accelerate.utils.modeling - INFO - modeling:990 - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2025-05-21 16:14:49,173 - src.models.deepseek - ERROR - deepseek:116 - Критическая ошибка при загрузке модели 'deepseek-ai/deepseek-llm-7b-base'.
+Traceback (most recent call last):
+  File "/home/massonsky/repo/study/intelligent-ai/src/models/deepseek.py", line 109, in _load_model
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 571, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 279, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4380, in from_pretrained
+    device_map = _get_device_map(model, device_map, max_memory, hf_quantizer, torch_dtype, keep_in_fp32_regex)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1304, in _get_device_map
+    hf_quantizer.validate_environment(device_map=device_map)
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/quantizers/quantizer_bnb_8bit.py", line 101, in validate_environment
+    raise ValueError(
+ValueError: Some modules are dispatched on the CPU or the disk. Make sure you have enough GPU RAM to fit the quantized model. If you want to dispatch the model on the CPU or the disk while keeping these modules in 32-bit, you need to set `llm_int8_enable_fp32_cpu_offload=True` and pass a custom `device_map` to `from_pretrained`. Check https://huggingface.co/docs/transformers/main/en/main_classes/quantization#offload-between-cpu-and-gpu for more details. 
+2025-05-21 16:14:49,174 - __main__ - ERROR - deepseek_test:27 - Непредвиденная ошибка в примере DeepSeekModel.
+Traceback (most recent call last):
+  File "/home/massonsky/repo/study/intelligent-ai/deepseek_test.py", line 17, in <module>
+    model = DeepSeekModel("deepseek-ai/deepseek-llm-7b-base")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/src/models/deepseek.py", line 32, in __init__
+    self.model = self._load_model()
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/src/models/deepseek.py", line 109, in _load_model
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py", line 571, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 279, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4380, in from_pretrained
+    device_map = _get_device_map(model, device_map, max_memory, hf_quantizer, torch_dtype, keep_in_fp32_regex)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 1304, in _get_device_map
+    hf_quantizer.validate_environment(device_map=device_map)
+  File "/home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/transformers/quantizers/quantizer_bnb_8bit.py", line 101, in validate_environment
+    raise ValueError(
+ValueError: Some modules are dispatched on the CPU or the disk. Make sure you have enough GPU RAM to fit the quantized model. If you want to dispatch the model on the CPU or the disk while keeping these modules in 32-bit, you need to set `llm_int8_enable_fp32_cpu_offload=True` and pass a custom `device_map` to `from_pretrained`. Check https://huggingface.co/docs/transformers/main/en/main_classes/quantization#offload-between-cpu-and-gpu for more details. 
+2025-05-21 16:14:49,186 - __main__ - INFO - deepseek_test:30 - Остановка QueueListener логирования...
+2025-05-21 16:33:39,448 - root - INFO - logging_config:65 - Логирование настроено. Уровень: DEBUG. Файл: /home/massonsky/repo/study/intelligent-ai/app.log
+2025-05-21 16:33:39,448 - __main__ - INFO - deepseek_test:14 - Запуск примера использования DeepSeekModel...
+2025-05-21 16:33:39,448 - src.models.deepseek - INFO - deepseek:11 - Инициализация DeepSeekModel. model_id: 'deepseek-ai/deepseek-llm-7b-base', запрошенное устройство: 'None'
+2025-05-21 16:33:39,448 - src.models.deepseek - DEBUG - deepseek:50 - Определение оптимального устройства. Принудительное устройство: None
+2025-05-21 16:33:39,457 - src.models.deepseek - INFO - deepseek:55 - CUDA доступна. Используется устройство 'cuda'.
+2025-05-21 16:33:39,457 - src.models.deepseek - DEBUG - deepseek:14 - Выбрано устройство: cuda
+2025-05-21 16:33:39,457 - src.models.deepseek - DEBUG - deepseek:64 - Получение объема памяти GPU для устройства cuda.
+2025-05-21 16:33:39,469 - src.models.deepseek - DEBUG - deepseek:71 - Доступно VRAM (CUDA:0): 7.77 GB.
+2025-05-21 16:33:39,470 - src.models.deepseek - INFO - deepseek:81 - Выбор конфигурации загрузки. Устройство: cuda, VRAM: 7.8 GB.
+2025-05-21 16:33:39,470 - src.models.deepseek - INFO - deepseek:101 - Конфигурация для CUDA 6-12GB: 8bit quant, device_map='auto', llm_int8_enable_fp32_cpu_offload=True.
+2025-05-21 16:33:39,470 - src.models.deepseek - DEBUG - deepseek:19 - Параметры для загрузки модели: {'device_map': 'auto', 'quantization_config': BitsAndBytesConfig {
+  "_load_in_4bit": false,
+  "_load_in_8bit": true,
+  "bnb_4bit_compute_dtype": "float32",
+  "bnb_4bit_quant_storage": "uint8",
+  "bnb_4bit_quant_type": "fp4",
+  "bnb_4bit_use_double_quant": false,
+  "llm_int8_enable_fp32_cpu_offload": true,
+  "llm_int8_has_fp16_weight": false,
+  "llm_int8_skip_modules": null,
+  "llm_int8_threshold": 6.0,
+  "load_in_4bit": false,
+  "load_in_8bit": true,
+  "quant_method": "bitsandbytes"
+}
+}
+2025-05-21 16:33:39,470 - src.models.deepseek - INFO - deepseek:22 - Загрузка токенизатора для 'deepseek-ai/deepseek-llm-7b-base'...
+2025-05-21 16:33:39,471 - urllib3.connectionpool - DEBUG - connectionpool:1049 - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-21 16:33:39,786 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-05-21 16:33:39,957 - src.models.deepseek - INFO - deepseek:25 - Токенизатор успешно загружен.
+2025-05-21 16:33:39,958 - src.models.deepseek - INFO - deepseek:31 - Загрузка модели 'deepseek-ai/deepseek-llm-7b-base'...
+2025-05-21 16:33:39,958 - src.models.deepseek - INFO - deepseek:115 - Начало загрузки модели 'deepseek-ai/deepseek-llm-7b-base' с параметрами: {'device_map': 'auto', 'quantization_config': BitsAndBytesConfig {
+  "_load_in_4bit": false,
+  "_load_in_8bit": true,
+  "bnb_4bit_compute_dtype": "float32",
+  "bnb_4bit_quant_storage": "uint8",
+  "bnb_4bit_quant_type": "fp4",
+  "bnb_4bit_use_double_quant": false,
+  "llm_int8_enable_fp32_cpu_offload": true,
+  "llm_int8_has_fp16_weight": false,
+  "llm_int8_skip_modules": null,
+  "llm_int8_threshold": 6.0,
+  "load_in_4bit": false,
+  "load_in_8bit": true,
+  "quant_method": "bitsandbytes"
+}
+}
+2025-05-21 16:33:40,109 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/config.json HTTP/1.1" 200 0
+2025-05-21 16:33:40,134 - bitsandbytes.cextension - DEBUG - cextension:71 - Loading bitsandbytes native library from: /home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/bitsandbytes/libbitsandbytes_cuda121.so
+2025-05-21 16:33:40,355 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/model.safetensors.index.json HTTP/1.1" 404 0
+2025-05-21 16:33:40,356 - urllib3.connectionpool - DEBUG - connectionpool:1049 - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-21 16:33:40,528 - accelerate.utils.modeling - INFO - modeling:990 - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2025-05-21 16:33:40,673 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base HTTP/1.1" 200 2590
+2025-05-21 16:33:40,858 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base/commits/main HTTP/1.1" 200 2004
+2025-05-21 16:33:41,021 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base/discussions?p=0 HTTP/1.1" 200 4506
+2025-05-21 16:33:41,222 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base/commits/refs%2Fpr%2F3 HTTP/1.1" 200 2969
+2025-05-21 16:33:41,401 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/refs%2Fpr%2F3/model.safetensors.index.json HTTP/1.1" 200 0
+2025-05-21 16:33:41,547 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/refs%2Fpr%2F3/model.safetensors.index.json HTTP/1.1" 200 0
+2025-05-21 16:41:10,880 - root - INFO - logging_config:65 - Логирование настроено. Уровень: DEBUG. Файл: /home/massonsky/repo/study/intelligent-ai/app.log
+2025-05-21 16:41:10,880 - __main__ - INFO - deepseek_test:14 - Запуск примера использования DeepSeekModel...
+2025-05-21 16:41:10,880 - src.models.deepseek - INFO - deepseek:11 - Инициализация DeepSeekModel. model_id: 'deepseek-ai/deepseek-llm-7b-base', запрошенное устройство: 'None'
+2025-05-21 16:41:10,880 - src.models.deepseek - DEBUG - deepseek:50 - Определение оптимального устройства. Принудительное устройство: None
+2025-05-21 16:41:10,890 - src.models.deepseek - INFO - deepseek:55 - CUDA доступна. Используется устройство 'cuda'.
+2025-05-21 16:41:10,890 - src.models.deepseek - DEBUG - deepseek:14 - Выбрано устройство: cuda
+2025-05-21 16:41:10,890 - src.models.deepseek - DEBUG - deepseek:64 - Получение объема памяти GPU для устройства cuda.
+2025-05-21 16:41:10,902 - src.models.deepseek - DEBUG - deepseek:71 - Доступно VRAM (CUDA:0): 7.77 GB.
+2025-05-21 16:41:10,902 - src.models.deepseek - INFO - deepseek:81 - Выбор конфигурации загрузки. Устройство: cuda, VRAM: 7.8 GB.
+2025-05-21 16:41:10,902 - src.models.deepseek - INFO - deepseek:97 - Конфигурация для CUDA 6-12GB: 8bit quant, device_map='auto', cpu offload.
+2025-05-21 16:41:10,902 - src.models.deepseek - DEBUG - deepseek:19 - Параметры для загрузки модели: {'device_map': 'auto', 'quantization_config': BitsAndBytesConfig {
+  "_load_in_4bit": false,
+  "_load_in_8bit": true,
+  "bnb_4bit_compute_dtype": "float32",
+  "bnb_4bit_quant_storage": "uint8",
+  "bnb_4bit_quant_type": "fp4",
+  "bnb_4bit_use_double_quant": false,
+  "llm_int8_enable_fp32_cpu_offload": true,
+  "llm_int8_has_fp16_weight": false,
+  "llm_int8_skip_modules": null,
+  "llm_int8_threshold": 6.0,
+  "load_in_4bit": false,
+  "load_in_8bit": true,
+  "quant_method": "bitsandbytes"
+}
+}
+2025-05-21 16:41:10,902 - src.models.deepseek - INFO - deepseek:22 - Загрузка токенизатора для 'deepseek-ai/deepseek-llm-7b-base'...
+2025-05-21 16:41:10,903 - urllib3.connectionpool - DEBUG - connectionpool:1049 - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-21 16:41:11,671 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/tokenizer_config.json HTTP/1.1" 200 0
+2025-05-21 16:41:11,866 - src.models.deepseek - INFO - deepseek:25 - Токенизатор успешно загружен.
+2025-05-21 16:41:11,866 - src.models.deepseek - INFO - deepseek:31 - Загрузка модели 'deepseek-ai/deepseek-llm-7b-base'...
+2025-05-21 16:41:11,866 - src.models.deepseek - INFO - deepseek:145 - Начало загрузки модели 'deepseek-ai/deepseek-llm-7b-base' с параметрами: {'device_map': 'auto', 'quantization_config': BitsAndBytesConfig {
+  "_load_in_4bit": false,
+  "_load_in_8bit": true,
+  "bnb_4bit_compute_dtype": "float32",
+  "bnb_4bit_quant_storage": "uint8",
+  "bnb_4bit_quant_type": "fp4",
+  "bnb_4bit_use_double_quant": false,
+  "llm_int8_enable_fp32_cpu_offload": true,
+  "llm_int8_has_fp16_weight": false,
+  "llm_int8_skip_modules": null,
+  "llm_int8_threshold": 6.0,
+  "load_in_4bit": false,
+  "load_in_8bit": true,
+  "quant_method": "bitsandbytes"
+}
+}
+2025-05-21 16:41:12,027 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/config.json HTTP/1.1" 200 0
+2025-05-21 16:41:12,516 - bitsandbytes.cextension - DEBUG - cextension:71 - Loading bitsandbytes native library from: /home/massonsky/repo/study/intelligent-ai/.venv/lib/python3.12/site-packages/bitsandbytes/libbitsandbytes_cuda121.so
+2025-05-21 16:41:12,688 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/main/model.safetensors.index.json HTTP/1.1" 404 0
+2025-05-21 16:41:12,690 - urllib3.connectionpool - DEBUG - connectionpool:1049 - Starting new HTTPS connection (1): huggingface.co:443
+2025-05-21 16:41:13,456 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base HTTP/1.1" 200 2590
+2025-05-21 16:41:13,627 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base/commits/main HTTP/1.1" 200 2004
+2025-05-21 16:41:13,798 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base/discussions?p=0 HTTP/1.1" 200 4506
+2025-05-21 16:41:14,025 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "GET /api/models/deepseek-ai/deepseek-llm-7b-base/commits/refs%2Fpr%2F3 HTTP/1.1" 200 2969
+2025-05-21 16:41:14,403 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/refs%2Fpr%2F3/model.safetensors.index.json HTTP/1.1" 200 0
+2025-05-21 16:41:14,551 - urllib3.connectionpool - DEBUG - connectionpool:544 - https://huggingface.co:443 "HEAD /deepseek-ai/deepseek-llm-7b-base/resolve/refs%2Fpr%2F3/model.safetensors.index.json HTTP/1.1" 200 0
+2025-05-21 16:41:16,549 - accelerate.utils.modeling - INFO - modeling:990 - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2025-05-21 16:42:10,662 - __main__ - INFO - deepseek_test:30 - Остановка QueueListener логирования...

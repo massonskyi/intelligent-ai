@@ -4,6 +4,7 @@ node_modules
 .idea
 .vscode
 .pytest_cache
+.venv
 venv
 /model
 __pycache__
