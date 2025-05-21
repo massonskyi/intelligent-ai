@@ -7,30 +7,30 @@ pipeline {
     }
     stages {
         stage('Build') {
-                    steps {
-            bat 'pip install -r requirements.txt'
+            steps {
+                bat 'pip install -r requirements.txt'
+            }
         }
-                }
         stage('Deploy') {
-                    when {
-                        expression { env.BRANCH_NAME == 'main' }
-                    }
-                    steps {
-                        // Deploying python to staging
-                        bat 'echo Deploying to staging'
-                    }
-                }
-        stage('Test') {
-                    steps {
-            bat 'pytest'
+            when {
+                expression { env.BRANCH_NAME == 'main' }
+            }
+            steps {
+                // Deploying python to staging
+                bat 'echo Deploying to staging'
+            }
         }
-                }
+        stage('Test') {
+            steps {
+                bat 'pytest'
+            }
+        }
         stage('Publish') {
-                    steps {
-                        // Archiving artifacts: *.whl
-                        archiveArtifacts artifacts: '*.whl', allowEmptyArchive: true
-                    }
-                }
+            steps {
+                // Archiving artifacts: *.whl
+                archiveArtifacts artifacts: '*.whl', allowEmptyArchive: true
+            }
+        }
     }
     post {
         always {
