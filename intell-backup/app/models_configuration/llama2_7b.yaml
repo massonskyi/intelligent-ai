@@ -1,9 +1,0 @@
-name: llama2-7b-chat
-type: transformers
-model_path: meta-llama/Llama-2-7b-chat-hf
-params:
-  device: cuda
-  max_new_tokens: 256
-  torch_dtype: float16
-temperature: 0.7
-top_p: 0.95

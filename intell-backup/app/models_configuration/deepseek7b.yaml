@@ -1,9 +1,0 @@
-name: deepseek-7b-base
-type: transformers
-model_path: deepseek-ai/deepseek-llm-7b-base
-params:
-  device: cuda
-  max_new_tokens: 256
-  torch_dtype: float16
-temperature: 0.7
-top_p: 0.95
