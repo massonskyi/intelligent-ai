@@ -7,16 +7,17 @@ from contextlib import asynccontextmanager
 
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from app.core.metrics_persist import metrics_persist_task
-from app.scripts.auth_huggingface_hub import setup_hf_auth
-from app.services.metrics_service import metrics_service
-from app.core.settings import settings
-from app.core.logging import setup_logging, get_logger
-from app.db.database import init_db
-from app.api.llm import router as llm_router
-from app.api.rag import router as rag_router
-from app.api.admin import router as admin_router
-from app.api.history import router as history_router
+from core.metrics_persist import metrics_persist_task
+from scripts.auth_huggingface_hub import setup_hf_auth
+from services.metrics_service import metrics_service
+from core.settings import settings
+from core.logging import setup_logging, get_logger
+from db.database import init_db
+from api.llm import router as llm_router
+from api.rag import router as rag_router
+from api.admin import router as admin_router
+from api.history import router as history_router
+from api.metrics import router as metadata_router
 from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -65,7 +66,18 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzip=True)
+# Указать путь до build-папки фронта
+FRONTEND_DIST = os.path.abspath(os.getcwd() + "/static")
 
+# Раздаём статику (js, css, media, etc)
+app.mount("/static", StaticFiles(directory=os.path.join(FRONTEND_DIST, "static")), name="static")
+
+app.include_router(llm_router, prefix="/llm", tags=["llm"])
+app.include_router(rag_router, prefix="/llm", tags=["rag"])
+app.include_router(admin_router, prefix="/admin", tags=["admin"])
+app.include_router(history_router, prefix="/llm", tags=["history"])
+app.include_router(metadata_router, prefix="/metrics", tags=["metadata"])
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.exception(f"Unhandled exception: {exc}")
@@ -82,19 +94,10 @@ async def serve_spa(full_path: str):
 def main():
     # В начале main.py, до запуска FastAPI!
     setup_hf_auth()
-    Instrumentator().instrument(app).expose(app, include_in_schema=False, should_gzip=True)
-    # Указать путь до build-папки фронта
-    FRONTEND_DIST = os.path.abspath(os.path.join(os.path.dirname(__file__), "static"))
-
-    # Раздаём статику (js, css, media, etc)
-    app.mount("/static", StaticFiles(directory=os.path.join(FRONTEND_DIST, "static")), name="static")
-
-    app.include_router(llm_router, prefix="/llm", tags=["llm"])
-    app.include_router(rag_router, prefix="/llm", tags=["rag"])
-    app.include_router(admin_router, prefix="/admin", tags=["admin"])
-    app.include_router(history_router, prefix="/llm", tags=["history"])
 
     import uvicorn
-    uvicorn.run("app.server:app", host=settings.host, port=settings.port, reload=settings.debug)
+    uvicorn.run("server:app", host=settings.host, port=settings.port, reload=settings.debug)
 
 
+if __name__ == "__main__":
+    main()

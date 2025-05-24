@@ -11,24 +11,30 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPrometheusMetrics().then(txt => {
-      setMetrics(parsePrometheusMetrics(txt));
-    });
-    getModelConfigs().then(cfgs => {
-      setModels(Object.values(cfgs));
-      setLoading(false);
-    });
-  }, []);
+    console.log("📡 Fetching metrics...");
+    getPrometheusMetrics()
+      .then(txt => {
+        console.log("✅ Raw metrics:", txt);
+        setMetrics(parsePrometheusMetrics(txt));
+      })
+      .catch(err => {
+        console.error("❌ Error loading metrics:", err);
+      });
+  });
 
   // Готовим данные для BarChart
   const chartData = React.useMemo(() => {
-    if (!metrics) return [];
-    return models.map((m: any) => ({
-      name: m.name,
-      requests: metrics[`llm_model_requests_total{"model":"${m.name}"}`] ?? 0,
-      tokens: metrics[`llm_model_tokens_total{"model":"${m.name}"}`] ?? 0,
-      latency: metrics[`llm_model_avg_latency_ms{"model":"${m.name}"}`] ?? 0,
-    }));
+    if (!metrics || models.length === 0) return [];
+  
+    return models.map((m: any) => {
+      const modelName = m.name;
+      return {
+        name: modelName,
+        requests: metrics[`llm_model_requests_total{model="${modelName}"}`] ?? 0,
+        tokens: metrics[`llm_model_tokens_total{model="${modelName}"}`] ?? 0,
+        latency: metrics[`llm_model_avg_latency_ms{model="${modelName}"}`] ?? 0,
+      };
+    });
   }, [metrics, models]);
 
   return (

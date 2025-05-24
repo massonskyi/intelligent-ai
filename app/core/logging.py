@@ -4,7 +4,7 @@ import sys
 import os
 from logging.handlers import RotatingFileHandler
 
-LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG").upper()
 LOG_PATH = os.getenv("LOG_PATH", "logs/app.log")
 LOG_FORMAT = os.getenv("LOG_FORMAT", "color")  # color | json | plain
 

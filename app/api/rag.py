@@ -1,15 +1,15 @@
 import json
 from fastapi import APIRouter, Request
 from torch import select
-from app.db.database import get_session
-from app.models.orm import RAGHistory
-from app.scripts.text_processing import extract_jenkinsfile_block
-from app.services.retriever_service import retriever_service
-from app.services.rag_history_service import rag_history_service
-from app.rag.template import format_context_block, get_prompt_template, truncate_prompt
-from app.services.llm_service import llm_service
-from app.core.logging import get_logger
-from app.models.schemas import RAGRequest, RAGResponse
+from db.database import get_session
+from models.orm import RAGHistory
+from scripts.text_processing import extract_jenkinsfile_block
+from services.retriever_service import retriever_service
+from services.rag_history_service import rag_history_service
+from rag.template import format_context_block, get_prompt_template, truncate_prompt
+from services.llm_service import llm_service
+from core.logging import get_logger
+from models.schemas import RAGRequest, RAGResponse
 
 logger = get_logger(__name__)
 router = APIRouter()

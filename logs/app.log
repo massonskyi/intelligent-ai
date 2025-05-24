@@ -127,3 +127,30 @@ AttributeError: 'ConfigStore' object has no attribute 'get'[0m
 [92m[INFO] 2025-05-24 14:06:32 app.server:41 - Startup: Starting metrics persist background task.[0m
 [92m[INFO] 2025-05-24 14:06:34 app.server:45 - Shutdown: Cancelling metrics persist task.[0m
 [92m[INFO] 2025-05-24 14:06:34 app.server:51 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-24 15:09:31 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 15:09:47 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 15:09:49 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 15:09:49 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 15:09:55 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 15:09:55 app.server:39 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-24 15:09:55 app.server:41 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-24 15:11:16 app.server:45 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-24 15:11:16 app.server:51 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-24 15:11:20 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 15:11:24 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 15:11:25 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 15:11:25 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 15:11:27 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 15:11:27 app.server:39 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-24 15:11:27 app.server:41 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-24 15:11:36 app.server:45 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-24 15:11:36 app.server:51 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-24 15:11:38 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 15:11:42 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 15:11:43 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 15:11:43 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 15:11:45 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 15:11:45 app.server:39 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-24 15:11:45 app.server:41 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-24 15:12:28 app.server:45 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-24 15:12:28 app.server:51 - Shutdown: Persist task stopped.[0m

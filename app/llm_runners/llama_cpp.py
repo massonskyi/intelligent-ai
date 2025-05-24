@@ -15,7 +15,7 @@ class LlamaCppRunner:
         self.model = None
         self._lock = RLock()
         self._load_model()
-        from app.core.config import config_store
+        from core.config import config_store
         config_store.subscribe(self._on_config_change)
 
     def _on_config_change(self, _):
@@ -68,7 +68,7 @@ class LlamaCppRunner:
                 latency_ms = int((t_end - t_start) * 1000)
                 # Логируем метрики
                 try:
-                    from app.services.metrics_service import metrics_service
+                    from services.metrics_service import metrics_service
                     asyncio.create_task(metrics_service.record_request(
                         model=self.cfg.name,
                         tokens=prompt_tokens + result_tokens,
@@ -80,7 +80,7 @@ class LlamaCppRunner:
             except Exception as e:
                 # Логируем ошибку
                 try:
-                    from app.services.metrics_service import metrics_service
+                    from services.metrics_service import metrics_service
                     asyncio.create_task(metrics_service.record_error(
                         model=self.cfg.name
                     ))

@@ -1,7 +1,7 @@
 # app/api/admin.py
 from fastapi import APIRouter, HTTPException, Body
-from app.services.retriever_service import retriever_service
-from app.core.config import config_store
+from services.retriever_service import retriever_service
+from core.config import config_store
 
 router = APIRouter()
 

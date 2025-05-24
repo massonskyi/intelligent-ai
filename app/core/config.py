@@ -83,8 +83,8 @@ class ConfigStore:
             with open(file, "r") as f:
                 d = yaml.safe_load(f)
                 model_cfg = LLMModelConfig(**d)
-                self._models[model_cfg.name] = model_cfg
-                self._model_files[model_cfg.name] = file
+                self._models[model_cfg.name.lower()] = model_cfg  # <-- lowercase
+                self._model_files[model_cfg.name.lower()] = file
 
     def reload_models(self):
         """Reload all model configs from disk."""
@@ -101,7 +101,7 @@ class ConfigStore:
         return self.app_config
 
     def get_model_config(self, name: str) -> LLMModelConfig:
-        return self._models[name]
+        return self._models[name.lower()]  # <-- lowercase lookup
 
     def get_all_model_configs(self) -> Dict[str, LLMModelConfig]:
         return dict(self._models)

@@ -5,8 +5,9 @@ import json
 from typing import Dict, Any
 from datetime import datetime
 
-from app.db.database import get_session
-from app.models.orm import LLMMetricsSnapshot
+from db.database import get_session
+from models.orm import LLMMetricsSnapshot, LLMRequestMetric
+
 
 class MetricsService:
     def __init__(self):
@@ -51,7 +52,7 @@ class MetricsService:
         async with self._lock:
             self.users_stats[user]["requests"] += 1
             self.users_stats[user]["tokens"] += tokens
-            
+
     async def record_request(self, model: str, tokens: int, latency_ms: int):
         async with self._lock:
             self.total_requests += 1
@@ -65,6 +66,21 @@ class MetricsService:
                 stats["total_latency_ms"] / stats["requests"]
                 if stats["requests"] > 0 else 0.0
             )
+
+        # ➕ Сохраняем в БД:
+        try:
+            async with get_session() as session:
+                record = LLMRequestMetric(
+                    model=model,
+                    tokens=tokens,
+                    duration_ms=latency_ms
+                )
+                session.add(record)
+                await session.commit()
+        except Exception as e:
+            from core.logging import get_logger
+            logger = get_logger(__name__)
+            logger.warning(f"[Metrics] Не удалось сохранить LLMRequestMetric: {e}")
 
     async def get_metrics(self):
         async with self._lock:

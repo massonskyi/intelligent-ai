@@ -1,16 +1,16 @@
 # app/services/llm_service.py
 
 from typing import Optional, Dict, Any
-from app.core.config import config_store
-from app.llm_runners.llama_cpp import LlamaCppRunner
-from app.llm_runners.transformers import TransformersRunner
-from app.llm_runners.deepseek import DeepSeekModel
-from app.llm_runners.mistral import MistralModel
-from app.llm_runners.codellama import CodeLlamaModel
-from app.llm_runners.starcoder import StarCoderModel
-from app.llm_runners.llama2 import Llama2Model
-from app.db.database import get_session
-from app.models.orm import LLMHistory
+from core.config import config_store
+from llm_runners.llama_cpp import LlamaCppRunner
+from llm_runners.transformers import TransformersRunner
+from llm_runners.deepseek import DeepSeekModel
+from llm_runners.mistral import MistralModel
+from llm_runners.codellama import CodeLlamaModel
+from llm_runners.starcoder import StarCoderModel
+from llm_runners.llama2 import Llama2Model
+from db.database import get_session
+from models.orm import LLMHistory
 import json
 from datetime import datetime
 
@@ -31,6 +31,7 @@ class LLMService:
         config_store.subscribe(self.reload_all_runners)
 
     def get_runner(self, model_name: str):
+        model_name = model_name.strip().lower()  # <-- normalize
         cfg = config_store.get_model_config(model_name)
         model_type = cfg.type.lower()
         if model_name not in self.runners:

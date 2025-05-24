@@ -4,7 +4,8 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TextIter
 import torch
 import time
 from threading import RLock
-
+from core.logging import get_logger
+logger = get_logger(__name__)
 class TransformersRunner:
     """
     Production-ready HuggingFace runner:
@@ -22,8 +23,10 @@ class TransformersRunner:
         self.device = self._select_device(cfg)
         self._lock = RLock()
         self._load_model_and_tokenizer()
-        from app.core.config import config_store
+        from core.config import config_store
         config_store.subscribe(self._on_config_change)
+        logger.info(
+            f"[TransformersRunner] Initialized for model: {getattr(cfg, 'name', '<missing>')} at {cfg.model_path}")
 
     def _on_config_change(self, _):
         asyncio.create_task(self.reload())
@@ -177,9 +180,13 @@ class TransformersRunner:
 
         # run sync in executor
         res = await loop.run_in_executor(None, sync_gen)
+
         # Интеграция с метриками (если есть)
         try:
-            from app.services.metrics_service import metrics_service
+            from services.metrics_service import metrics_service
+            logger.debug(
+                f"[generate] model={self.cfg.name} | latency={res['latency_ms']}ms | tokens={res['tokens_result']}")
+
             await metrics_service.record_request(
                 model=self.cfg.name,
                 tokens=res["tokens_result"],

@@ -5,7 +5,7 @@ import os
 # Убедись, что PYTHONPATH содержит корень проекта (чтобы импортировать retriever_service)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from app.services.retriever_service import retriever_service
+from services.retriever_service import retriever_service
 docs = [
     {
         "id": "doc1",

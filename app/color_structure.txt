@@ -1,0 +1,194 @@
+﻿ +-- [.idea]
+ +-- [alembic]
+ +-- [api]
+ +-- [core]
+ +-- [db]
+ +-- [llm_runners]
+ +-- [logs]
+ +-- [models]
+ +-- [models_configuration]
+ +-- [rag]
+ +-- [scripts]
+ +-- [services]
+ +-- [static]
+ +-- [__pycache__]
+ |   .deps_ok
+ |   .env
+ |   .env.example
+ |   .gitignore
+ |   .torch_ok
+ |   alembic.ini
+ |   file_structure.txt
+ |   file_structure_sorted.txt
+ |   history.sqlite
+ |   output.txt
+ |   requirements.txt
+ |   server.py
+ |   __init__.py
+ |   +-- [inspectionProfiles]
+ |   |   .gitignore
+ |   |   app.iml
+ |   |   encodings.xml
+ |   |   misc.xml
+ |   |   modules.xml
+ |   |   vcs.xml
+ |   |   workspace.xml
+ |   |   |   profiles_settings.xml
+ |   |   |   Project_Default.xml
+ |   +-- [versions]
+ |   +-- [__pycache__]
+ |   |   env.py
+ |   |   README
+ |   |   script.py.mako
+ |   |   +-- [__pycache__]
+ |   |   |   477cfb4be1d2_init.py
+ |   |   |   86683f6b153f_init.py
+ |   |   |   f1a74d1106dd_add_metrics.py
+ |   |   |   |   477cfb4be1d2_init.cpython-310.pyc
+ |   |   |   |   86683f6b153f_init.cpython-310.pyc
+ |   |   |   |   f1a74d1106dd_add_metrics.cpython-310.pyc
+ |   |   |   env.cpython-310.pyc
+ |   +-- [__pycache__]
+ |   |   admin.py
+ |   |   history.py
+ |   |   llm.py
+ |   |   metrics.py
+ |   |   rag.py
+ |   |   __init__.py
+ |   |   |   admin.cpython-310.pyc
+ |   |   |   admin.cpython-312.pyc
+ |   |   |   history.cpython-310.pyc
+ |   |   |   history.cpython-312.pyc
+ |   |   |   llm.cpython-310.pyc
+ |   |   |   llm.cpython-312.pyc
+ |   |   |   metrics.cpython-310.pyc
+ |   |   |   rag.cpython-310.pyc
+ |   |   |   rag.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   +-- [__pycache__]
+ |   |   config.py
+ |   |   logging.py
+ |   |   metrics_persist.py
+ |   |   settings.py
+ |   |   __init__.py
+ |   |   |   config.cpython-310.pyc
+ |   |   |   config.cpython-312.pyc
+ |   |   |   logging.cpython-310.pyc
+ |   |   |   logging.cpython-312.pyc
+ |   |   |   metrics_persist.cpython-310.pyc
+ |   |   |   metrics_persist.cpython-312.pyc
+ |   |   |   settings.cpython-310.pyc
+ |   |   |   settings.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   +-- [__pycache__]
+ |   |   database.py
+ |   |   __init__.py
+ |   |   |   database.cpython-310.pyc
+ |   |   |   database.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   +-- [__pycache__]
+ |   |   codellama.py
+ |   |   deepseek.py
+ |   |   llama2.py
+ |   |   llama_cpp.py
+ |   |   mistral.py
+ |   |   starcoder.py
+ |   |   transformers.py
+ |   |   __init__.py
+ |   |   |   codellama.cpython-310.pyc
+ |   |   |   codellama.cpython-312.pyc
+ |   |   |   deepseek.cpython-310.pyc
+ |   |   |   deepseek.cpython-312.pyc
+ |   |   |   llama2.cpython-310.pyc
+ |   |   |   llama2.cpython-312.pyc
+ |   |   |   llama_cpp.cpython-310.pyc
+ |   |   |   llama_cpp.cpython-312.pyc
+ |   |   |   mistral.cpython-310.pyc
+ |   |   |   mistral.cpython-312.pyc
+ |   |   |   starcoder.cpython-310.pyc
+ |   |   |   starcoder.cpython-312.pyc
+ |   |   |   transformers.cpython-310.pyc
+ |   |   |   transformers.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   |   app.log
+ |   +-- [__pycache__]
+ |   |   orm.py
+ |   |   schemas.py
+ |   |   __init__.py
+ |   |   |   orm.cpython-310.pyc
+ |   |   |   orm.cpython-312.pyc
+ |   |   |   schemas.cpython-310.pyc
+ |   |   |   schemas.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   |   codellama7b.yaml
+ |   |   deepseek-r1-qwen-14b.yaml
+ |   |   deepseek7b.yaml
+ |   |   llama2_7b.yaml
+ |   |   mistral7b.yaml
+ |   |   starcoder.yaml
+ |   |   starcoder15b.yaml
+ |   +-- [__pycache__]
+ |   |   context.py
+ |   |   template.py
+ |   |   __init__.py
+ |   |   |   template.cpython-310.pyc
+ |   |   |   template.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   +-- [__pycache__]
+ |   |   auth_huggingface_hub.py
+ |   |   import_jenkins_docs.py
+ |   |   text_processing.py
+ |   |   __init__.py
+ |   |   |   auth_huggingface_hub.cpython-310.pyc
+ |   |   |   auth_huggingface_hub.cpython-312.pyc
+ |   |   |   text_processing.cpython-310.pyc
+ |   |   |   text_processing.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   +-- [__pycache__]
+ |   |   history_service.py
+ |   |   llm_service.py
+ |   |   metrics_service.py
+ |   |   rag_history_service.py
+ |   |   retriever_service.py
+ |   |   __init__.py
+ |   |   |   llm_service.cpython-310.pyc
+ |   |   |   llm_service.cpython-312.pyc
+ |   |   |   metrics_service.cpython-310.pyc
+ |   |   |   metrics_service.cpython-312.pyc
+ |   |   |   rag_history_service.cpython-310.pyc
+ |   |   |   rag_history_service.cpython-312.pyc
+ |   |   |   retriever_service.cpython-310.pyc
+ |   |   |   retriever_service.cpython-312.pyc
+ |   |   |   __init__.cpython-310.pyc
+ |   |   |   __init__.cpython-312.pyc
+ |   +-- [static]
+ |   |   asset-manifest.json
+ |   |   favicon.ico
+ |   |   index.html
+ |   |   logo192.png
+ |   |   logo512.png
+ |   |   manifest.json
+ |   |   robots.txt
+ |   |   service-worker.js
+ |   |   service-worker.js.map
+ |   |   +-- [js]
+ |   |   |   |   main.2778c269.js
+ |   |   |   |   main.2778c269.js.LICENSE.txt
+ |   |   |   |   main.2778c269.js.map
+ |   |   main.cpython-310.pyc
+ |   |   server.cpython-310.pyc
+ |   |   server.cpython-312.pyc
+ |   |   __init__.cpython-310.pyc
+
+============= SUMMARY =============
+Folders: 28
+Files: 160
+Size: "12,11 MB
+==================================

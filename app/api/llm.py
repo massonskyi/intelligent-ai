@@ -1,8 +1,8 @@
 # app/api/llm.py
 import asyncio
 from fastapi.responses import StreamingResponse
-from app.models.schemas import GenerateRequest, GenerateResponse
-from app.models.schemas import (
+from models.schemas import GenerateRequest, GenerateResponse
+from models.schemas import (
     BatchGenerateRequest,
     BatchGenerateResponse,
     BatchGenerateResponseItem,
@@ -12,9 +12,9 @@ from fastapi import APIRouter, HTTPException, Depends, Request
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 
-from app.scripts.text_processing import extract_jenkinsfile_block
-from app.services.llm_service import llm_service
-from app.core.logging import get_logger
+from scripts.text_processing import extract_jenkinsfile_block
+from services.llm_service import llm_service
+from core.logging import get_logger
 
 logger = get_logger(__name__)
 router = APIRouter()
@@ -24,7 +24,7 @@ async def generate_pipeline(req: GenerateRequest, request: Request):
     """
     Генерация пайплайна или любого текста через выбранную модель.
     """
-
+    logger.info("Got request: %s", await request.body())
 
     logger.info(f"Запрос генерации: model={req.model}, user={req.user_id}")
     try:

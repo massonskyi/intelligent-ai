@@ -95,6 +95,7 @@ export async function setAppConfig(config: any): Promise<any> {
 }
 
 export async function getPrometheusMetrics(): Promise<string> {
-  const resp = await axios.get("/metrics/prometheus", { responseType: "text" });
-  return resp.data; // raw Prometheus text
+  const resp = await axios.get(`${BASE_URL}/metrics/prometheus`, { responseType: "text" });
+  return resp.data;
 }
+
