@@ -3,7 +3,7 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, BitsAndBytesConfig
 from accelerate import infer_auto_device_map, init_empty_weights, load_checkpoint_and_dispatch
 from typing import Any, Dict
-from core.logging import get_logger
+from app.core.logging import get_logger
 
 logger = get_logger(__name__)
 

@@ -1,6 +1,6 @@
 # app/services/history_service.py
-from models.orm import LLMHistory
-from db.database import get_session
+from app.models.orm import LLMHistory
+from app.db.database import get_session
 from typing import List, Optional
 
 async def add_history(model: str, prompt: str, response: str, user_id: Optional[str] = None, params: Optional[dict] = None, duration_ms: Optional[int] = None):

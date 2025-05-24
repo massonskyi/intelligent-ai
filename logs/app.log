@@ -92,3 +92,38 @@ AttributeError: 'ConfigStore' object has no attribute 'get'[0m
 [92m[INFO] 2025-05-22 20:47:21 main:25 - Startup: Starting metrics persist background task.[0m
 [92m[INFO] 2025-05-22 20:47:48 main:29 - Shutdown: Cancelling metrics persist task.[0m
 [92m[INFO] 2025-05-22 20:47:48 main:35 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-24 14:02:12 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:02:55 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:03:01 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 14:03:03 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 14:03:03 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 14:03:07 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:04:00 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:04:04 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 14:04:04 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 14:04:04 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 14:04:07 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:05:02 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:05:06 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 14:05:07 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 14:05:07 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 14:05:09 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:05:45 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:05:49 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 14:05:49 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 14:05:49 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 14:05:52 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:06:08 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:06:12 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 14:06:13 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 14:06:13 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 14:06:15 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:06:26 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:06:30 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-24 14:06:30 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-24 14:06:30 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-24 14:06:32 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-24 14:06:32 app.server:39 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-24 14:06:32 app.server:41 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-24 14:06:34 app.server:45 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-24 14:06:34 app.server:51 - Shutdown: Persist task stopped.[0m

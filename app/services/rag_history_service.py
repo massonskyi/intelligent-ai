@@ -1,6 +1,6 @@
 import json
-from db.database import get_session
-from models.orm import RAGHistory
+from app.db.database import get_session
+from app.models.orm import RAGHistory
 
 class RAGHistoryService:
     async def log(self, *, user_id, model, question, context_docs, answer):

@@ -5,8 +5,8 @@ import json
 from typing import Dict, Any
 from datetime import datetime
 
-from db.database import get_session
-from models.orm import LLMMetricsSnapshot
+from app.db.database import get_session
+from app.models.orm import LLMMetricsSnapshot
 
 class MetricsService:
     def __init__(self):

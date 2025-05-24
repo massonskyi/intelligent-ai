@@ -22,7 +22,7 @@ class TransformersRunner:
         self.device = self._select_device(cfg)
         self._lock = RLock()
         self._load_model_and_tokenizer()
-        from core.config import config_store
+        from app.core.config import config_store
         config_store.subscribe(self._on_config_change)
 
     def _on_config_change(self, _):
@@ -179,7 +179,7 @@ class TransformersRunner:
         res = await loop.run_in_executor(None, sync_gen)
         # Интеграция с метриками (если есть)
         try:
-            from services.metrics_service import metrics_service
+            from app.services.metrics_service import metrics_service
             await metrics_service.record_request(
                 model=self.cfg.name,
                 tokens=res["tokens_result"],

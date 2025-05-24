@@ -221,3 +221,11 @@ Pipeline записан в файл успешно.
 [VIRTUAL ENV] /home/massonsky/repo/study/intelligent-ai/.venv
 [WORKDIR] /home/massonsky/repo/study/intelligent-ai
 Используемое устройство: cuda
+Используемое устройство: cuda
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
+Используемое устройство: cuda
+[PYTHON EXECUTABLE] D:\intelligent-ai\venv\Scripts\python.exe
+[VIRTUAL ENV] D:\intelligent-ai\venv
+[WORKDIR] D:\intelligent-ai
