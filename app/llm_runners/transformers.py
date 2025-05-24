@@ -1,4 +1,5 @@
 import asyncio
+from typing import Callable, Optional
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, TextIteratorStreamer
 import torch
 import time
@@ -17,7 +18,7 @@ class TransformersRunner:
         self.cfg = cfg
         self.model = None
         self.tokenizer = None
-        self.text_generator = None
+        self.text_generator: Optional[Callable] = None
         self.device = self._select_device(cfg)
         self._lock = RLock()
         self._load_model_and_tokenizer()
@@ -26,7 +27,39 @@ class TransformersRunner:
 
     def _on_config_change(self, _):
         asyncio.create_task(self.reload())
-
+    def filter_generate_kwargs(self, kwargs: dict) -> dict:
+        """
+        The function `filter_generate_kwargs` filters and validates input keyword arguments based on a
+        predefined set of allowed keys, with additional protection against invalid temperature values.
+        
+        :param kwargs: The `kwargs` parameter in the `filter_generate_kwargs` function is a dictionary that
+        contains various key-value pairs representing different parameters for a text generation model. The
+        function filters out only the allowed parameters based on the keys specified in the `allowed` set.
+        Additionally, it includes a check to remove the
+        :type kwargs: dict
+        :return: The function `filter_generate_kwargs` returns a dictionary containing only the key-value
+        pairs from the input `kwargs` dictionary that have keys specified in the `allowed` set.
+        Additionally, it removes the key-value pair with key "temperature" if the corresponding value is
+        less than or equal to 0 or if the value cannot be converted to a float.
+        """
+        allowed = {
+            "max_length", "min_length", "max_new_tokens", "min_new_tokens",
+            "do_sample", "temperature", "top_p", "top_k", "repetition_penalty",
+            "num_return_sequences", "eos_token_id", "pad_token_id",
+            "early_stopping", "length_penalty", "penalty_alpha",
+            "no_repeat_ngram_size", "typical_p", "logits_processor", "bad_words_ids",
+            "output_scores", "return_dict_in_generate", "renormalize_logits",
+            "forced_bos_token_id", "forced_eos_token_id", "remove_invalid_values"
+        }
+        filtered = {k: v for k, v in kwargs.items() if k in allowed}
+        # Защита от temperature <= 0
+        if "temperature" in filtered:
+            try:
+                if float(filtered["temperature"]) <= 0:
+                    del filtered["temperature"]
+            except Exception:
+                del filtered["temperature"]
+        return filtered
     def _select_device(self, cfg):
         # auto-detect, user can override via cfg.params.device
         forced_device = (cfg.params or {}).get("device", None)
@@ -121,11 +154,18 @@ class TransformersRunner:
             "top_p": gen_kwargs.get("top_p", getattr(self.cfg, "top_p", 0.95)),
         }
         final_gen_kwargs = {**default_gen_kwargs, **gen_kwargs}
+        final_gen_kwargs = self.filter_generate_kwargs(final_gen_kwargs)  # Фильтруем!
+
         def sync_gen():
             t_start = time.monotonic()
+            if not self.text_generator:
+                return 
             result = self.text_generator(prompt, **final_gen_kwargs)
             t_end = time.monotonic()
             output = result[0]["generated_text"]
+            
+            assert hasattr(self.tokenizer, "encode"), "Tokenizer is wrong initialize"
+            
             prompt_tokens = len(self.tokenizer.encode(prompt))
             result_tokens = len(self.tokenizer.encode(output))
             return {
@@ -134,6 +174,7 @@ class TransformersRunner:
                 "tokens_result": result_tokens,
                 "latency_ms": int((t_end - t_start) * 1000)
             }
+
         # run sync in executor
         res = await loop.run_in_executor(None, sync_gen)
         # Интеграция с метриками (если есть)

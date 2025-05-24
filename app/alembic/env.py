@@ -13,8 +13,8 @@ import sys
 # Путь ../.. потому что env.py находится в app/alembic/
 sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from app.models.orm import SQLModel  # Импортируем SQLModel из вашего orm.py
-from app.db.database import DATABASE_URL # Используем URL из вашего database.py
+from models.orm import SQLModel  # Импортируем SQLModel из вашего orm.py
+from db.database import DATABASE_URL # Используем URL из вашего database.py
 
 # Устанавливаем target_metadata на метаданные вашей SQLModel
 target_metadata = SQLModel.metadata

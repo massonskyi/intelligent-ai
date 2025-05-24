@@ -28,7 +28,7 @@ async def get_model_configs():
     """
     Получить текущие конфиги моделей (для UI/отладки).
     """
-    return config_store.get().models
+    return {name: cfg.dict() for name, cfg in config_store.get_all_model_configs().items()}
 
 @router.post("/set_model_param", tags=["admin"])
 async def set_model_param(path: str, value):
@@ -39,7 +39,18 @@ async def set_model_param(path: str, value):
     config_store.set(path, value)
     return {"status": "updated", "path": path, "value": value}
 
-@router.post("/admin/set_default_model")
+@router.post("/set_default_model")
 async def set_default_model(model: str):
     config_store.set_default_model(model)
     return {"status": "ok", "default_model": model}
+
+@router.get("/app_config")
+async def get_app_config():
+    return config_store.get_app_config().dict()
+
+@router.post("/set_app_config")
+async def set_app_config(payload: dict):
+    for k, v in payload.items():
+        setattr(config_store.app_config, k, v)
+    config_store.reload_app_config()
+    return {"ok": True}

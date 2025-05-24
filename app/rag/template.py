@@ -1,6 +1,8 @@
 from typing import Any
-from llama_cpp import Dict, List
-
+try:
+    from llama_cpp import Dict, List
+except ImportError:
+    from typing import Dict, List
 
 PROMPT_TEMPLATES = {
     "default": (

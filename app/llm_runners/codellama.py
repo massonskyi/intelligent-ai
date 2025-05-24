@@ -182,7 +182,8 @@ class CodeLlamaModel:
         if project.get("buildTool"):
             parts.append(f"Build tool: {project['buildTool']}")
         if "testFrameworks" in project and project["testFrameworks"]:
-            parts.append(f"Test frameworks: {', '.join(project["testFrameworks"])}")
+            val = project["testFrameworks"]
+            parts.append(f"Test frameworks: {', '.join(val)}")
         if "dockerfilePresent" in project:
             parts.append(f"Dockerfile present: {project['dockerfilePresent']}")
         if "files" in project:

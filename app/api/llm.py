@@ -11,6 +11,8 @@ from models.schemas import (
 from fastapi import APIRouter, HTTPException, Depends, Request
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
+
+from scripts.text_processing import extract_jenkinsfile_block
 from services.llm_service import llm_service
 from core.logging import get_logger
 
@@ -22,6 +24,8 @@ async def generate_pipeline(req: GenerateRequest, request: Request):
     """
     Генерация пайплайна или любого текста через выбранную модель.
     """
+
+
     logger.info(f"Запрос генерации: model={req.model}, user={req.user_id}")
     try:
         # Передаём все параметры в сервис (он дальше сам роутит к раннеру)
@@ -37,13 +41,15 @@ async def generate_pipeline(req: GenerateRequest, request: Request):
             user_id=req.user_id
         )
         # result может быть либо строкой, либо dict c деталями (если runner поддерживает)
+        
         if isinstance(result, dict):
             text = result.get("text") or result.get("result")
             usage = result.get("usage", None)
         else:
             text = result
             usage = None
-        # Можно вернуть id из истории, если нужно
+
+        result_text = extract_jenkinsfile_block(text)
         return GenerateResponse(
             model=req.model,
             prompt=req.prompt,

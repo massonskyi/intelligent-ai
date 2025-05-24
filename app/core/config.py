@@ -23,8 +23,8 @@ class AppConfig(BaseModel):
     max_context: int = 4096
     history_db: str = "history.sqlite"
     admin_password: str = "admin"
-    models: dict = {}
-    default_model: str = "deepseek"   # значение по умолчанию
+    # models: dict = {}
+    default_model: str = "deepseek-r1-qwen-14b"   # значение по умолчанию
     # Можно расширить по мере надобности
 
 def load_all_model_configs(dir_path="models_configuration") -> dict:

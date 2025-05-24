@@ -1,13 +1,11 @@
 import json
-from fastapi import APIRouter, HTTPException, Request
-from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
-
+from fastapi import APIRouter, Request
 from torch import select
 from db.database import get_session
 from models.orm import RAGHistory
-from services import rag_history_service, retriever_service
-from rag.context import retrieve_context
+from scripts.text_processing import extract_jenkinsfile_block
+from services.retriever_service import retriever_service
+from services.rag_history_service import rag_history_service
 from rag.template import format_context_block, get_prompt_template, truncate_prompt
 from services.llm_service import llm_service
 from core.logging import get_logger
@@ -41,6 +39,7 @@ async def rag_generate(req: RAGRequest, request: Request):
         user_id=req.user_id, model=req.model, question=req.question,
         context_docs=docs, answer=result
     )
+    result_text = extract_jenkinsfile_block(result)
     return RAGResponse(answer=result, context_docs=docs)
 
 

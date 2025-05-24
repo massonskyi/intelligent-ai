@@ -1,0 +1,94 @@
+[92m[INFO] 2025-05-21 22:48:45 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:55:05 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:55:08 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:55:49 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:55:53 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:55:53 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 22:55:54 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 22:55:54 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 22:56:45 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:56:49 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:56:49 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 22:56:50 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 22:56:50 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 22:56:52 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:56:52 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:56:52 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 22:58:56 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:00 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:01 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 22:59:01 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 22:59:01 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 22:59:03 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:03 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:03 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 22:59:46 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:50 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:51 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-21 22:59:51 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-21 22:59:51 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-21 22:59:54 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:54 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-21 22:59:54 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-21 22:59:54 main:25 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-21 23:00:02 main:29 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-21 23:00:02 main:35 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-22 20:42:52 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:43:45 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:43:47 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-22 20:43:50 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-22 20:43:50 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-22 20:44:04 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:44:04 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:44:04 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-22 20:44:04 main:25 - Startup: Starting metrics persist background task.[0m
+[91m[ERROR] 2025-05-22 20:46:11 main:55 - Unhandled exception: 'ConfigStore' object has no attribute 'get'
+Traceback (most recent call last):
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\intelligent-ai\venv\lib\site-packages\prometheus_fastapi_instrumentator\middleware.py", line 177, in __call__
+    raise exc
+  File "D:\intelligent-ai\venv\lib\site-packages\prometheus_fastapi_instrumentator\middleware.py", line 175, in __call__
+    await self.app(scope, receive, send_wrapper)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\intelligent-ai\venv\lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+  File "D:\intelligent-ai\venv\lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+  File "D:\intelligent-ai\venv\lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+  File "D:\intelligent-ai\app\api\admin.py", line 31, in get_model_configs
+    return config_store.get().models
+AttributeError: 'ConfigStore' object has no attribute 'get'[0m
+[92m[INFO] 2025-05-22 20:47:12 main:29 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-22 20:47:12 main:35 - Shutdown: Persist task stopped.[0m
+[92m[INFO] 2025-05-22 20:47:14 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:47:18 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:47:18 datasets:54 - PyTorch version 2.5.1+cu121 available.[0m
+[92m[INFO] 2025-05-22 20:47:19 sentence_transformers.SentenceTransformer:211 - Use pytorch device_name: cuda:0[0m
+[92m[INFO] 2025-05-22 20:47:19 sentence_transformers.SentenceTransformer:219 - Load pretrained SentenceTransformer: all-MiniLM-L6-v2[0m
+[92m[INFO] 2025-05-22 20:47:21 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:47:21 root:77 - Logging setup: level=INFO, format=color, file=logs/app.log[0m
+[92m[INFO] 2025-05-22 20:47:21 main:23 - Startup: Restoring metrics from last snapshot...[0m
+[92m[INFO] 2025-05-22 20:47:21 main:25 - Startup: Starting metrics persist background task.[0m
+[92m[INFO] 2025-05-22 20:47:48 main:29 - Shutdown: Cancelling metrics persist task.[0m
+[92m[INFO] 2025-05-22 20:47:48 main:35 - Shutdown: Persist task stopped.[0m

@@ -1,7 +1,7 @@
 # app/api/history.py
 from fastapi import APIRouter, Query
-from models.orm import RAGHistory
 from db.database import get_session
+from models.orm import RAGHistory
 import json
 
 router = APIRouter()

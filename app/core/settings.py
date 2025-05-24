@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     app_config_path: str = Field(default="config.yaml", env="APP_CONFIG_PATH")
     models_config_dir: str = Field(default="models_configuration", env="MODELS_CONFIG_DIR")
 
+    huggingface_token: Optional[str] = Field(default=None, env="HUGGINGFACE_TOKEN")  # <-- обязательно Optional и дефолт None!
     # База данных
     db_url: str = Field(default="sqlite+aiosqlite:///history.sqlite", env="DB_URL")
 
@@ -53,5 +54,6 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        extra = "allow"  # <-- если хочешь разрешить любые ENV-поля
 
 settings = Settings()
