@@ -90,9 +90,11 @@ async def serve_spa(full_path: str):
         return FileResponse(index_path)
     return {"error": "Frontend not built"}
 
-if __name__ == "__main__":
+def main():
     # В начале main.py, до запуска FastAPI!
     setup_hf_auth()
 
     import uvicorn
     uvicorn.run("main:app", host=settings.host, port=settings.port, reload=settings.debug)
+
+
